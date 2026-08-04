@@ -697,7 +697,7 @@ export default function LandingMoneyPlan() {
                       {["biweekly", "monthly"].map((f) => (
                         <button
                           key={f}
-                          onClick={() => set("incomeFreq")(f)}
+                          onClick={() => { if (f === d.incomeFreq) return; const v = parseFloat(d.income); const nv = (!v || isNaN(v)) ? d.income : (f === "monthly" ? String(Math.round(v * 26 / 12)) : String(Math.round(v * 12 / 26))); setD(prev => ({ ...prev, income: nv, incomeFreq: f })); }}
                           className="px-3 py-1.5 text-xs font-mono capitalize rounded-full"
                           style={{ background: d.incomeFreq === f ? INK : "transparent", color: d.incomeFreq === f ? PAPER : INK }}
                         >
@@ -843,7 +843,7 @@ export default function LandingMoneyPlan() {
                       {["biweekly", "monthly"].map((f) => (
                         <button
                           key={f}
-                          onClick={() => set("efContribFreq")(f)}
+                          onClick={() => { if (f === d.efContribFreq) return; const v = parseFloat(d.efContribution); const nv = (!v || isNaN(v)) ? d.efContribution : (f === "monthly" ? String(Math.round(v * 26 / 12)) : String(Math.round(v * 12 / 26))); setD(prev => ({ ...prev, efContribution: nv, efContribFreq: f })); }}
                           className="px-3 py-1.5 text-xs font-mono capitalize rounded-full"
                           style={{ background: d.efContribFreq === f ? INK : "transparent", color: d.efContribFreq === f ? PAPER : INK }}
                         >
@@ -1236,7 +1236,7 @@ export default function LandingMoneyPlan() {
                       {["biweekly", "monthly"].map((f) => (
                         <button
                           key={f}
-                          onClick={() => set("contributionFreq")(f)}
+                          onClick={() => { if (f === d.contributionFreq) return; const v = parseFloat(d.contribution); const nv = (!v || isNaN(v)) ? d.contribution : (f === "monthly" ? String(Math.round(v * 26 / 12)) : String(Math.round(v * 12 / 26))); setD(prev => ({ ...prev, contribution: nv, contributionFreq: f })); }}
                           className="px-3 py-1.5 text-xs font-mono capitalize rounded-full"
                           style={{ background: d.contributionFreq === f ? INK : "transparent", color: d.contributionFreq === f ? PAPER : INK }}
                         >
@@ -1585,7 +1585,7 @@ export default function LandingMoneyPlan() {
                   <div className="flex rounded-full border-2 shrink-0" style={{ borderColor: INK }}>
                     {["biweekly", "monthly"].map((f) => (
                       <button
-                        key={f} onClick={() => set("incomeFreq")(f)}
+                        key={f} onClick={() => { if (f === d.incomeFreq) return; const v = parseFloat(d.income); const nv = (!v || isNaN(v)) ? d.income : (f === "monthly" ? String(Math.round(v * 26 / 12)) : String(Math.round(v * 12 / 26))); setD(prev => ({ ...prev, income: nv, incomeFreq: f })); }}
                         className="px-3 py-1.5 text-xs font-mono capitalize rounded-full"
                         style={{ background: d.incomeFreq === f ? INK : "transparent", color: d.incomeFreq === f ? PAPER : INK }}
                       >
@@ -1636,7 +1636,7 @@ export default function LandingMoneyPlan() {
                   <div className="flex rounded-full border-2 shrink-0" style={{ borderColor: INK }}>
                     {["biweekly", "monthly"].map((f) => (
                       <button
-                        key={f} onClick={() => set("contributionFreq")(f)}
+                        key={f} onClick={() => { if (f === d.contributionFreq) return; const v = parseFloat(d.contribution); const nv = (!v || isNaN(v)) ? d.contribution : (f === "monthly" ? String(Math.round(v * 26 / 12)) : String(Math.round(v * 12 / 26))); setD(prev => ({ ...prev, contribution: nv, contributionFreq: f })); }}
                         className="px-3 py-1.5 text-xs font-mono capitalize rounded-full"
                         style={{ background: d.contributionFreq === f ? INK : "transparent", color: d.contributionFreq === f ? PAPER : INK }}
                       >
