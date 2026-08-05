@@ -240,7 +240,7 @@ export default function LandingMoneyPlanSite() {
           </p>
           <div className="grid sm:grid-cols-4 gap-6">
             {[
-              [Landmark, "Your brokerage, open", "Set up right, no minimums, no guesswork about which account to pick first."],
+              [Landmark, "Your brokerage up and running", "Set up right, no minimums, no guesswork about which account to pick first."],
               [Repeat, "Synced to your bank", "One automatic transfer, straight from chequing, on your actual payday."],
               [TrendingUp, "The right investments", "Real Canadian tickers, split the way you decide, buying itself on schedule."],
               [Award, "Set it once, then nothing", "Lock in your personal numbers using this tool. No spreadsheets, no logins, no remembering after that."],
