@@ -105,6 +105,7 @@ export default function LandingMoneyPlanSite() {
         <p className="text-sm max-w-xl mb-6" style={{ color: INK, opacity: 0.6 }}>
           You'll enter your own salary, bills, and goals. Every gate builds toward investing that works for you automatically, no spreadsheet required.
         </p>
+        <p className="text-sm max-w-xl mb-6 font-bold" style={{ color: FOREST }}>Skip the gurus and the hot tips. This is the boring yet effective stuff that quietly builds wealth, one automatic transfer at a time, the same core idea behind every personal finance bestseller.</p>
         <div className="rounded-[1.75rem] overflow-hidden mb-8" style={{ aspectRatio: "1.21", maxWidth: 560 }}>
           <img src="/photos/trail-mountain-fixed.jpg" alt="Hiking near Mount Shuksan, BC" className="w-full h-full object-cover" />
         </div>
