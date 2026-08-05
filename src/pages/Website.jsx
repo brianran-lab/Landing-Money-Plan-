@@ -66,7 +66,7 @@ export default function LandingMoneyPlanSite() {
   }, []);
 
   const [email, setEmail] = useState("");
-  const [joined, setJoined] = useState(false);
+  const [joined, setJoined] = useState(false); const [gatesScrolled, setGatesScrolled] = useState(false);
 
   const handleJoin = (e) => {
     e.preventDefault();
@@ -189,8 +189,8 @@ export default function LandingMoneyPlanSite() {
           <div className="font-mono text-xs uppercase tracking-wider mb-2" style={{ color: STAMP }}>The route</div>
           <h2 className="text-2xl sm:text-3xl mb-2">Ten gates. Your own numbers at every one.</h2>
           <p className="mb-6" style={{ opacity: 0.7 }}>Not a PDF to read. A tool you actually fill in, gate by gate, until the whole thing runs itself.</p>
-          <div className="relative"><div id="gates-scroll" className="flex gap-3 overflow-x-auto gate-scroll pb-2 -mx-5 px-5 sm:mx-0 sm:px-0">
-            {GATES.map((g) => <GateChip key={g.code} g={g} />)}<div className="sticky right-0 top-0 h-full flex items-center pointer-events-none" style={{ background: `linear-gradient(to right, transparent, ${PAPER} 55%)`, width: 64, marginLeft: -64 }}><button type="button" onClick={() => document.getElementById("gates-scroll")?.scrollBy({ left: 280, behavior: "smooth" })} className="pointer-events-auto flex items-center justify-center rounded-full shadow-md ml-auto" style={{ background: INK, color: PAPER, width: 32, height: 32 }} aria-label="Show more gates"><ArrowRight size={16} /></button></div>
+          <div className="relative"><div id="gates-scroll" onScroll={(e) => setGatesScrolled(e.currentTarget.scrollLeft > 10)} className="flex gap-3 overflow-x-auto gate-scroll pb-2 -mx-5 px-5 sm:mx-0 sm:px-0">
+            {gatesScrolled && <div className="sticky left-0 top-0 h-full flex items-center z-10" style={{ marginRight: -40 }}><button type="button" onClick={() => document.getElementById("gates-scroll")?.scrollBy({ left: -280, behavior: "smooth" })} className="flex items-center justify-center rounded-full shadow-md" style={{ background: INK, color: PAPER, width: 32, height: 32 }} aria-label="Show previous gates"><ArrowRight size={16} style={{ transform: "rotate(180deg)" }} /></button></div>}{GATES.map((g) => <GateChip key={g.code} g={g} />)}<div className="sticky right-0 top-0 h-full flex items-center pointer-events-none" style={{ background: `linear-gradient(to right, transparent, ${PAPER} 55%)`, width: 64, marginLeft: -64 }}><button type="button" onClick={() => document.getElementById("gates-scroll")?.scrollBy({ left: 280, behavior: "smooth" })} className="pointer-events-auto flex items-center justify-center rounded-full shadow-md ml-auto" style={{ background: INK, color: PAPER, width: 32, height: 32 }} aria-label="Show more gates"><ArrowRight size={16} /></button></div>
       </div>
           </div>
         </div>
