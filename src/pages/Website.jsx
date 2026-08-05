@@ -106,7 +106,7 @@ export default function LandingMoneyPlanSite() {
           You'll enter your own salary, bills, and goals. Every gate builds and sets up your own money machine automatically, no spreadsheet required.
         </p>
         <div className="rounded-[1.75rem] overflow-hidden mb-8" style={{ aspectRatio: "1.21", maxWidth: 560 }}>
-          <img src={SKYLINE_IMG} alt="Hiking near Mount Shuksan, BC" className="w-full h-full object-cover" />
+          <img src="/photos/trail-mountain-fixed.jpg" alt="Hiking near Mount Shuksan, BC" className="w-full h-full object-cover" />
         </div>
         <form onSubmit={handleJoin} id="waitlist" className="flex flex-col sm:flex-row gap-3 max-w-md">
           <input
@@ -141,7 +141,7 @@ export default function LandingMoneyPlanSite() {
           </div>
           <div className="sm:col-span-2">
             <div className="rounded-[1.75rem] overflow-hidden mb-3" style={{ aspectRatio: "0.75" }}>
-              <img src={COASTAL_IMG} alt="Walking the tracks, BC backcountry" className="w-full h-full object-cover" />
+              <img src="/photos/trail-tracks-final.jpg" alt="Walking the tracks, BC backcountry" className="w-full h-full object-cover" />
             </div>
             <div className="rounded-[1.75rem] p-6" style={{ background: INK, color: PAPER }}>
               <div className="font-mono text-3xl font-bold mb-1" style={{ color: GOLD }}>$1K/mo → $2M+</div>
