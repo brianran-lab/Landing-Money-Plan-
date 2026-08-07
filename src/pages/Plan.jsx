@@ -432,16 +432,19 @@ export default function LandingMoneyPlan() {
   });
   const set = (k) => (v) => setD((prev) => ({ ...prev, [k]: v }));
 
+  const [isSubscribed, setIsSubscribed] = useState(false);
     useEffect(() => {
           let active = true;
           (async () => {
                   const { data: userData } = await supabase.auth.getUser();
                   const user = userData && userData.user;
                   if (!user) return;
-                  const { data: row } = await supabase.from("user_data").select("data").eq("user_id", user.id).maybeSingle();
-                  if (active && row && row.data) {
-                            setD((prev) => ({ ...prev, ...row.data }));
+                  const { data: row } = await supabase.from("user_data").select("data, is_subscribed").eq("user_id",
+          if (active && row) {
+                                if (row.data) setD((prev) => ({ ...prev, ...row.data }));
+                                setIsSubscribed(!!row.is_subscribed);
                   }
+            
           })();
           return () => { active = false; };
     }, []);
@@ -589,6 +592,33 @@ export default function LandingMoneyPlan() {
 
   const goNext = () => setStep((s) => Math.min(STEPS.length - 1, s + 1));
   const goBack = () => setStep((s) => Math.max(0, s - 1));
+
+    const handleSubscribe = async () => {
+          const { data: userData } = await supabase.auth.getUser();
+          const user = userData && userData.user;
+          if (!user) return;
+          const res = await fetch("/api/create-checkout-session", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ userId: user.id, email: user.email }),
+          });
+          const out = await res.json();
+          if (out && out.url) window.location.href = out.url;
+    };
+
+    if (step > 0 && !isSubscribed) {
+          return (
+                  <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-8" style={{ background: PAPER }}>
+                            <div className="w-full max-w-sm rounded-2xl border-2 p-8 text-center" style={{ borderColor: LINE }}>
+                                        <h2 className="text-2xl font-bold mb-3" style={{ color: INK }}>Unlock the rest of the plan</h2>
+                                        <p className="text-sm mb-6" style={{ color: INK, opacity: 0.7 }}>Gate 1 is free. The other nine gates, plus your numbers saved for good, are $6.99 a month.</p>
+                                        <button type="button" onClick={handleSubscribe} className="w-full px-6 py-3 rounded-full font-bold text-sm mb-3" style={{ background: INK, color: PAPER }}>Subscribe - $6.99/mo</button>
+                                        <button type="button" onClick={goBack} className="text-xs underline" style={{ color: INK, opacity: 0.6 }}>Back to Gate 1</button>
+                            </div>
+                  </div>
+                );
+    }
+  
 
   return (
     <div
