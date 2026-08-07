@@ -432,6 +432,33 @@ export default function LandingMoneyPlan() {
   });
   const set = (k) => (v) => setD((prev) => ({ ...prev, [k]: v }));
 
+    useEffect(() => {
+          let active = true;
+          (async () => {
+                  const { data: userData } = await supabase.auth.getUser();
+                  const user = userData && userData.user;
+                  if (!user) return;
+                  const { data: row } = await supabase.from("user_data").select("data").eq("user_id", user.id).maybeSingle();
+                  if (active && row && row.data) {
+                            setD((prev) => ({ ...prev, ...row.data }));
+                  }
+          })();
+          return () => { active = false; };
+    }, []);
+
+    useEffect(() => {
+          const timeoutId = setTimeout(() => {
+                  (async () => {
+                            const { data: userData } = await supabase.auth.getUser();
+                            const user = userData && userData.user;
+                            if (!user) return;
+                            await supabase.from("user_data").upsert({ user_id: user.id, data: d, updated_at: new Date().toISOString() });
+                  })();
+          }, 800);
+          return () => clearTimeout(timeoutId);
+    }, [d]);
+  
+
   const addItem = (group, label) =>
     setD((prev) => ({ ...prev, [group]: [...prev[group], { id: `${Date.now()}-${Math.random()}`, label, amount: "", method: "chequing" }] }));
   const updateItemAmount = (group, id, amount) =>
