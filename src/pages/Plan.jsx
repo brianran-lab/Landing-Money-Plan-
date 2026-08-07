@@ -439,7 +439,7 @@ export default function LandingMoneyPlan() {
                   const { data: userData } = await supabase.auth.getUser();
                   const user = userData && userData.user;
                   if (!user) return;
-                  const { data: row } = await supabase.from("user_data").select("data, is_subscribed").eq("user_id",
+                  const { data: row } = await supabase.from("user_data").select("data, is_subscribed").eq("user_id", user.id).maybeSingle();
           if (active && row) {
                                 if (row.data) setD((prev) => ({ ...prev, ...row.data }));
                                 setIsSubscribed(!!row.is_subscribed);
